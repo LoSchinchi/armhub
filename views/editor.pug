@@ -1,0 +1,79 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title Text editor
+        
+        link(rel="stylesheet", href="/bootstrap/bootstrap.min.css")
+        link(rel='stylesheet', href='/stylesheets/styleEditor.css')
+        script(src="https://code.jquery.com/jquery-3.6.1.min.js")
+        script(src="/bootjs/bootstrap.min.js")
+    body
+        if exc != undefined
+            div#excModal.modal.modal-lg.fade(tabindex='-1' aria-labelledby='excModalLabel' aria-hidden='true')
+                div.modal-dialog
+                    div.modal-content
+                        div.modal-header
+                            h1#excModalLabel.modal-title.fs-5(style='color: black; font-weight: bold;') #{exc[3].split(':')[0]}
+                            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        div.modal-body(style='color: red;')
+                            each line in exc
+                                p #{line}
+                        div.modal-footer
+                            button.btn.btn-primary(type='button' data-bs-dismiss='modal') Chiudi
+
+        div#rulesModal.modal.modal-lg.fade(tabindex='-1' aria-labelledby='rulesModalLabel' aria-hidden='true')
+            div.modal-dialog
+                div.modal-content
+                    div.modal-header
+                        h1#rulesModalLabel.modal-title.fs-5(style='color: black; font-weight: bold;') Come usare l'editor
+                        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                    div.modal-body
+                        p Questo editor serve per programmare in Python i movimenti del braccio meccanico
+                        p I moduli RPi.GPIO e time vengono importati automaticamente
+                        p Non &egrave; necessario istanziare i motori del braccio
+                        div(style='color: red;')
+                            p I motori possono essere richiamati con :
+                            ul 
+                                li base: numero 1 o variabile BASE;
+                                li motori delle braccia: numero 2 o variabile BRACCIO;
+                                li avambraccio: numero 3 o variabile AVBRACCIO;
+                                li pinza: numero 4 o variabile PINZA.
+                        div(style='color: green;')
+                            p Funzioni aggiuntive: 
+                            ul 
+                                li void reset( ), resetta le posizioni del motore a quelle di default 
+                                li void save( ), salva le posizioni momentanee come di default per la funzione reset( )
+                                li void angle(motore: int, degrees: int), dato il motore e l'angolo (da 0 a 180), muove il motore 
+                                li void show(s1: str, s2=None: str | None), mostra una o due stringhe sul display lcd 
+                                li void stop( ), ferma e spegne tutti i motori 
+                                li void start( ), accende e attiva tutti i motori
+                        p Sarà possibile visualiizare eventuali errori sulla pagina e sul display
+                    div.modal-footer
+                        button.btn.btn-primary(type='button' data-bs-dismiss='modal') Chiudi
+
+        form(action='/session/interface', method='post')
+            input#a(type='submit', value='interfaccia dei motori')
+        div
+            div#editor
+                each line in arr
+                    div.line
+                        p.nLine
+                        div.codeLine #{line}
+                        input.code(type='text')   
+            div
+                button.bntModal.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#rulesModal', style='background: white;')
+                    img(src="/images/rules.png")
+                if exc != undefined
+                    button.bntModal.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#excModal', style='background: white;')
+                        img(src="/images/exception.png")   
+
+            form(method='post', action='/session/editor' name='perEditor', enctype='multipart/form-data')
+                button.butt(onclick='setCodeLine(lineSelected); load()', name='action', style='color: forestgreen', value='RUN') RUN
+                button.butt(onclick='setCodeLine(lineSelected); load()', name='action', style='color: red', value='DOWNLOAD') DOWNLOAD
+                input#fileDaCaricare(type='file', onchange='fileUploaded()', name='fileDaInput' value='')
+                input.butt(onclick='uploadFile()', type='button', name='action', style='color: blue', value='CARICA UN FILE')
+
+    script(type='text/javascript', src='/javascripts/editor.js')
+    if exc != undefined 
+        script(type='text/javascript', src='/javascripts/onLoad.js')

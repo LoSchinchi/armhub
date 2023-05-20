@@ -1,0 +1,79 @@
+from mainActions import *
+import traceback as tb
+import sys, os
+
+def reset():
+	resetMotors()
+
+try:
+	import random
+	
+	s = 'eeeee' + 55
+	angle(BASE, 45)
+	print('ciao')
+	sleep(1)
+	reset()
+	for x in range(90, 181):
+		angle(random.randint(4), x)
+	
+	angle(PINZA, 100)
+	print('fine')
+
+except BaseException as e:
+    tb.print_exc()
+    print('- ' * 30)
+    tb.print_exception(*sys.exc_info())
+    print('- ' * 30)
+    print(*sys.exc_info())
+    print('- ' * 30)
+    type, obj, tb_ = sys.exc_info()
+    print('- ' * 30)
+    fname = os.path.split(tb_.tb_frame.f_code.co_filename)
+    print(type, fname, tb_.tb_lineno)
+    print('- ' * 30)
+    #print(e.__traceback__)
+    #e.with_traceback()
+    print('aaaa')
+
+
+
+import random
+
+s = 'eeeee' + 55
+angle(BASE, 45)    
+print('ciao')
+sleep(1)
+reset()
+for x in range(90, 181):
+    angle(random.randint(4), x)  
+   
+angle(PINZA, 100)
+print('fine')   
+
+
+Traceback (most recent call last):
+  File "/home/pablitis/Desktop/server/python/run.py", line 16, in <module>
+    s = 'eeeee' + 55
+TypeError: can only concatenate str (not "int") to str
+
+Traceback (most recent call last):
+  Editor, line 3
+    s = 'eeeee' + 55
+TypeError: can only concatenate str (not "int") to str
+
+
+Traceback (most recent call last):
+  Editor, line 4
+    angle(BASE, '45')
+TypeError: unsupported operand type(s) for /: 'str' and 'int'
+
+
+button#liveToastBtn.btn.btn-primary(type='button') Show live toast
+.toast-container.position-fixed.bottom-0.end-0.p-3
+    #liveToast.toast(role='alert' aria-live='assertive' aria-atomic='true')
+        .toast-header
+            img.rounded.me-2(src='...' alt='...')
+            strong.me-auto Bootstrap
+            small 11 mins ago
+            button.btn-close(type='button' data-bs-dismiss='toast' aria-label='Close')
+        .toast-body Hello, world! This is a toast message.

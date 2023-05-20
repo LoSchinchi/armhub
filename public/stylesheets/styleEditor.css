@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#a {
+    margin: 30px 0;
+    text-decoration: none;
+    background-color: rgba(255, 255, 134, 0.8);
+    height: 50px;
+    width: 300px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-size: 20px;
+    color: black;
+    border: 4px solid rgb(255, 170, 0);
+    border-radius: 20px;
+    transition: all 400ms ease;
+}
+#a:hover {
+    cursor: pointer;
+    background-color: white;
+    border: 4px solid rgb(255, 170, 0);
+    border-radius: 30px;
+}
+
+body > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#editor {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 800px;
+    min-height: 300px;
+    border: 5px solid rgb(255, 170, 0);
+    background-color: rgba(255, 255, 134, 0.8);
+    max-height: 600px;
+    border-radius: 10px;
+    margin: 50px 0;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+}
+
+.nLine {
+    background-color: rgba(209, 209, 0, 0.637);
+    height: 30px;
+    width: 10%;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    /* non si può selezionare */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input {
+    width: 100%;
+    background-color: rgba(255, 255, 134, 0.1);
+    border: 0;
+    padding-left: 5px;
+    font-size: 17px;
+    letter-spacing: 0.1em;
+    font-family: "JetBrains Mono", serif;
+}
+input:focus {
+    outline: none;
+}
+
+.codeLine {
+    width: 0;
+    padding: 5px;
+    font-size: 17px;
+    letter-spacing: 0.1em;
+    margin: 0;
+    font-family: "JetBrains Mono", serif;
+    display: flex;
+    flex-direction: row;
+}
+
+.butt {
+    height: 50px;
+    width: 300px;
+    margin: 30px 0 10px 0;
+    font-family: "JetBrains Mono", serif;
+    border-radius: 15px;
+    border: 3px solid rgb(255, 170, 0);
+    background-color: rgba(255, 255, 134, 0.8);
+    transition: all 300ms ease;
+    font-size: 19px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+.butt:hover {
+    cursor: pointer;
+    border: 5px solid rgb(255, 170, 0);
+    height: 70px;
+    width: 350px;
+    margin-top: 30px;
+    border-radius: 20px;
+    font-size: 24px;
+}
+
+#fileDaCaricare {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.keyWord {
+    color: red;
+}
+
+button img {
+    height: 20px;
+}
+
+.bntModal {
+    background: white;
+    margin: -20px 40px 20px 40px;
+}

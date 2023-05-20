@@ -1,0 +1,101 @@
+doctype html
+head
+  link(rel='shortcut icon' href='./images/logo1.ico')
+  title IL CODICE
+  link(href='/stylesheets/style.css' rel='stylesheet')
+#logo
+    img.myimg(src='/images/logo.png' alt='logo')
+#header
+  #nav
+    ul
+        li
+          a(href='/' title='HOMEPAGE') HOMEPAGE
+        li
+          a(href='/project' title='IL PROGETTO') IL PROGETTO
+        li.paginascelta
+          a(href='/code' title='IL CODICE') IL CODICE
+        li
+          a(href='/session' target='_blank' title='INTERFACCIA') PILOTAGGIO DA REMOTO
+#section
+  h1 IL CODICE
+  p
+    | In questa pagina sono presenti gli spezzoni di codice Node.js che abbiamo sviluppato nel corso del nostro progetto...
+  h2 app.js
+  pre.
+            let createError = require('http-errors');
+            let express = require('express');
+            let path = require('path');
+            let cookieParser = require('cookie-parser');
+            let logger = require('morgan');
+            let cors = require('cors');
+
+            let indexRouter = require('./routes/index');
+            let usersRouter = require('./routes/users');
+            let sessionRouter = require('./routes/session');
+
+            let app = express();
+
+            // view engine setup
+            app.set('views', path.join(__dirname, 'views'));
+            app.set('view engine', 'pug');
+
+            app.use(logger('dev'));
+            app.use(express.json());
+            app.use(express.urlencoded({ extended: false }));
+            app.use(cookieParser());
+            app.use(express.static(path.join(__dirname, 'public'))); // si imposta una directory relativi per css, java
+            app.use(cors());
+
+            app.use('/', indexRouter);  // vanno tutti i file con root /pag1, /pag2
+            app.use('/users', usersRouter); // per creare altre roots
+            app.use('/session', sessionRouter);
+
+            // catch 404 and forward to error handler
+            app.use(function(req, res, next) {
+            next(createError(404));
+            });
+
+            // error handler
+            app.use(function(err, req, res, next) {
+            // set locals, only providing error in development
+            res.locals.message = err.message;
+            res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+            // render the error page
+            res.status(err.status || 500);
+            res.render('error');
+            });
+
+            module.exports = app;
+    
+                        
+  h1 NODE.JS
+  a
+    img(src='./images/node_js.png' alt='Node.js' style='border: 3px solid white')
+  h3 COS&apos;&Egrave;?
+  p
+    | Node.js &egrave; un runtime system, ed &egrave; open source, ovvero che il codice sorgente pu&ograve; essere modificato da 
+    | qualunque programmatore, al fine di migliorarne il programma.
+    br
+    |                 &Egrave; orientato agli eventi e serve per l&apos;esecuzione di codice JavaScript, anch&apos;esso &egrave; di base scritto in codice JavaScript.
+  h3 PERCH&Egrave; L&apos;ABBIAMO UTILIZZATO?
+  p
+    | Abbiamo deciso di utilizzare Node.js perch&egrave; &egrave; utilizzato nelle piccole e medie aziende, e soprattutto perch&egrave; ci fa 
+    | comodo in quanto non viene creato un server troppo grande, e non ha bisogno di altri contenuti applicativi oltre se
+    | se stesso per la creazione del server.
+    br
+    |                 Ci torna untile per implementare il download e l&apos;upload di file, oltre all&apos;esecuzione di file in Python sul Raspberry.
+  h1 NODE.JS - EXPRESS
+  p
+    | Viene utilizzato perch&egrave; &egrave; il pi&ugrave; completo tra i progetti Node.js per raggiungere il nostro obiettivo
+  h3 COS&apos;&Egrave;?
+  p
+    | &Egrave; un framework per applicazioni web per Node.js, anch&apos;esso open source.
+    br
+    |                     Il framework Express consente di creare potenti API di routing e di impostare middleware per rispondere alle richieste
+    |                      HTTP, fornendo semplici meccanismi di debugging e una rapida integrazione con vari motori di templating.
+    br
+    |                     Express &egrave; uno dei componenti basati su JavaScript del tech stack MEAN, &egrave; usato
+    |                      per programmare applicazioni web. Inoltre Express &egrave; la base su cui sono costruiti diversi altri framework.
+#copyright
+  p &copy; ARMHUB. All rights reserved.

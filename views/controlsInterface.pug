@@ -1,0 +1,44 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title Interfaccia di controllo
+        link(rel='stylesheet' href='/stylesheets/styleInterface.css')
+        script(src="https://code.jquery.com/jquery-3.6.1.min.js")
+    body
+        form(action='/session/editor', method='post')
+            input#a(type='submit', value='editor per programmare', name='runOrDownload')
+        div#rotelle
+            div
+                p.textServo Motore 1
+                div.base
+                    div.rotella
+                    p.p-rotella
+                div.inp-g
+                    p.textServo gradi:
+                    input(type='text' value='90')
+            div
+                p.textServo Motore 2
+                div.base
+                    div.rotella
+                    p.p-rotella
+                div.inp-g
+                    p.textServo gradi:
+                    input(type='text' value='90')
+            div
+                p.textServo Motore 3
+                div.base
+                    div.rotella
+                    p.p-rotella
+                div.inp-g
+                    p.textServo gradi:
+                    input(type='text' value='90')
+            div
+                p.textServo Motore 4
+                div.base
+                    div.rotella
+                    p.p-rotella
+                div.inp-g
+                    p.textServo gradi:
+                    input(type='text' value='90')
+    script(type='text/javascript' src='/javascripts/interface.js')
