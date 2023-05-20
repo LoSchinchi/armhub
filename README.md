@@ -1,12 +1,12 @@
 # armhub
 
-to install te server and our project:
+to install the server and our project:
 
-install nodejs and npm
+# install nodejs and npm
 - sudo apt install nodejs
 - sudo apt install npm
 
-create the server:
+# create the server:
 - `mkdir server`
 - `cd server`
 - `npx express-generator --view=pug`
@@ -14,5 +14,5 @@ create the server:
 - `npm i nodemon jquery fs child_prcess`
 - in `package.json` modify `"start": "node ./bin/www"` in `"start": "nodemon ./bin/www"`
 
-install python modules:
+# install python modules:
 - `sudo apt-get -y install python-rpi.gpio`
