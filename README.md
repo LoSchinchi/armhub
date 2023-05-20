@@ -17,4 +17,4 @@ to install the server and our project:
 # install python modules:
 - `sudo apt-get -y install python-rpi.gpio`
 
-to run the server, execute `npm start` in terminal in server directory, you will see your site at [localhost:3000](localhost:3000)
+to run the server, execute `npm start` in terminal in server directory, you will see your site at [localhost:3000](http://localhost:3000)
