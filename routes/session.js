@@ -10,12 +10,10 @@ let multipartMiddleware = multipart({ uploadDir: 'uploads' });
 const USERNAME = 'armhub', PASSWORD = 'zetaupi';
 let loginUnaVolta = false, datiSbagliati = false;
 exec('python3 python/lcdIP.py');
-//exec('python3 python/main.py');
 
 router.get('/', function(req, res, next) {
     if(req.body.logout !== undefined) {
         loginUnaVolta = false;
-        //exec('python3 python/lcdIP.py');
         return;
     }
     res.render('login', { accPossibile: !loginUnaVolta, datiSbagliati: datiSbagliati });
@@ -45,11 +43,9 @@ router.post('/editor', multipartMiddleware, function(req, res, next) {
                         res.render('editor', { arr: [''], exc: undefined });
                     else {
                         let d = data.split('\n');
-                        console.log('d: ', d);
                         let td = [];
                         for(let _d of d)
                             td.push(_d.trim());
-                        console.log('_td: ', td);
 
                         exec('rm -r uploads/*')
 
@@ -119,8 +115,6 @@ router.post('/interface', function(req, res, next) {
 
         fs.writeFile('dati/datiMotori.txt', content, {encoding: 'utf8'}, function(err) { });
     }
-    console.log('here')
-    //loginUnaVolta = true;
     datiSbagliati = false;
     res.render('controlsInterface');
 });

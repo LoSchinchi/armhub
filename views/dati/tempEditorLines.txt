@@ -1,0 +1,18 @@
+import random
+
+s = 'eeeee' + '55'
+angle(BASE, 45)
+print('ciao')
+sleep(1)
+reset()
+for x in range(150):
+	angle(random.randint(3), x)
+stop()
+sleep(1)
+start()
+for x in range(150):
+	angle(random.randint(3), x)
+
+
+#angle(PINZA, 100)
+print('fine')

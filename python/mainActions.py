@@ -1,9 +1,9 @@
 import RPi.GPIO as GPIO
-#from modules.I2C_LCD_driver import lcd as LCD
+from modules.I2C_LCD_driver import lcd as LCD
 from time import *
 
 GPIO.setmode(GPIO.BCM)
-PINS = [17, 27, 22] #, 17, 13, 18]
+PINS = [17, 27, 22, 23]
 KEY_WORD = 'motore'
 BASE = 1
 BRACCIO = 2
@@ -40,9 +40,6 @@ def setMotorFromTempFile():
         servo.ChangeDutyCycle(getDuty(int(d['degrees'])))
         sleep(1)
 
-#servos = [None] * 4
-#lcd = None
-
 for pin in PINS:
     GPIO.setup(pin, GPIO.OUT)
 servos = []
@@ -50,7 +47,7 @@ for pin in PINS:
     t = GPIO.PWM(pin, 50)
     t.start(0)
     servos.append(t)
-print(servos)
+
 servos[0].ChangeDutyCycle(0)
 setMotorFromTempFile()
 
@@ -59,7 +56,7 @@ def shutdown():
         s.stop()
     GPIO.cleanup()
 
-#lcd = LCD()
+lcd = LCD()
 
 def resetMotors():
     data = readFile('motors.txt')
@@ -73,33 +70,28 @@ def resetMotors():
     clearFile('tempMotori.txt')
 
 def showStringsLCD(d):
-    pass
-    #lcd.lcd_display_string('motore: ' + d[KEY_WORD], 1, 0)
-    #lcd.lcd_display_string('gradi: ' + d['degrees'], 2, 0)
+    lcd.lcd_display_string('motore: ' + d[KEY_WORD], 1, 0)
+    lcd.lcd_display_string('gradi: ' + d['degrees'], 2, 0)
 
 def toggleLCD(d):
     for _ in range(6):
         showStringsLCD(d)
         sleep(0.35)
-        #lcd.lcd_clear()
+        lcd.lcd_clear()
         sleep(0.35)
 
 def angle(nMot, degrees):
     servos[nMot - 1].ChangeDutyCycle(getDuty(degrees))
-    print('dentro')
     sleep(1)
 
 def reset():
     for i, data in enumerate(readFile('motors.txt')):
         angle(i + 1, int(data['degrees']))
 
-def save():
-    pass
-
 def show(s1, s2=None):
-    pass
+    lcd.lcd_display_string(s1, 1, 0)
     if s2 is not None:
-        pass
+        lcd.lcd_display_string(s2, 2, 0)
 
 def stop():
     for s in servos:
